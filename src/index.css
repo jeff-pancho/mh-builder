@@ -1,10 +1,16 @@
 .square {
     width: 40px;
     height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+
     background: #FFFFFF;
     border: 1px solid #000000;
 
-
     margin: 0;
     display: inline-block;
+}
+
+.grid-row {
+    height: 40px;
 }

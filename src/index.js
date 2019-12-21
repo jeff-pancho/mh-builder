@@ -4,10 +4,11 @@ import './index.css';
 
 class Square extends React.Component {
     render () {
+        let style = this.props.value ?
+            {background: "#FF0000"} :
+            {background: "#FFFFFF"};
         return (
-            <div className="square">
-                1
-            </div>
+            <div className="square" style={style} onClick={this.props.onClick}></div>
         );
     }
 }
@@ -15,15 +16,33 @@ class Square extends React.Component {
 class Grid extends React.Component {
     constructor(props) {
         super(props);
+
+        let grid = [];
+        const width = this.props.width;
+        const height = this.props.height;
+        for (let row = 0; row < height; row++) {
+            grid.push(Array(width).fill(false));
+        }
+
         this.state = {
-            butt: "ass"
+            grid: grid
         }
     }
 
-    renderSquare(i) {
+    handleClick(row, column) {
+        const grid = this.state.grid.slice();
+        grid[row][column] = !grid[row][column];
+        this.setState({
+            grid: grid
+        });
+    }
+
+    renderSquare(row, column) {
         return (
             <Square 
-                key={i}
+                key={column}
+                value={this.state.grid[row][column]} 
+                onClick={() => this.handleClick(row, column)} 
             />
         )
     }
@@ -33,25 +52,17 @@ class Grid extends React.Component {
         const width = this.props.width;
         const height = this.props.height;
 
-        for (let y = 0; y < height; y++) {
-            let column = [];
-            for (let x = 0; x < width; x++) {
-                column.push(this.renderSquare(x));
+        // generate grid of squares
+        for (let row = 0; row < height; row++) {
+            let squaresColumn = [];
+            for (let column = 0; column < width; column++) {
+                squaresColumn.push(this.renderSquare(row, column));
             }
-            squares.push(
-                <div 
-                    key={y}
-                    className="grid-row"
-                >
-                    {column}
-                </div>
-            );
+            squares.push(<div key={row} className="grid-row">{squaresColumn}</div>);
         }
 
         return (
-            <div>
-                {squares}
-            </div>
+            <div>{squares}</div>
         );
     }
 }
@@ -60,10 +71,7 @@ class Builder extends React.Component {
     render() {
         return (
             <div>
-                <Grid 
-                    width={10}
-                    height={10}
-                />
+                <Grid width={10} height={10} />
             </div>
         );
     }
