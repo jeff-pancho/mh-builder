@@ -14,35 +14,12 @@ class Square extends React.Component {
 }
 
 class Grid extends React.Component {
-    constructor(props) {
-        super(props);
-
-        let grid = [];
-        const width = this.props.width;
-        const height = this.props.height;
-        for (let row = 0; row < height; row++) {
-            grid.push(Array(width).fill(false));
-        }
-
-        this.state = {
-            grid: grid
-        }
-    }
-
-    handleClick(row, column) {
-        const grid = this.state.grid.slice();
-        grid[row][column] = !grid[row][column];
-        this.setState({
-            grid: grid
-        });
-    }
-
     renderSquare(row, column) {
         return (
             <Square 
                 key={column}
-                value={this.state.grid[row][column]} 
-                onClick={() => this.handleClick(row, column)} 
+                value={this.props.grid[row][column]} 
+                onClick={() => this.props.onClick(row, column)} 
             />
         )
     }
@@ -68,16 +45,64 @@ class Grid extends React.Component {
 }
 
 class Builder extends React.Component {
+    constructor(props) {
+        super(props);
+
+        const width = this.props.width;
+        const height = this.props.height;
+        this.state = {
+            grid: generateEmptyGrid(width, height)
+        }
+    }
+
+    handleClick(row, column) {
+        const grid = this.state.grid.slice();
+        grid[row][column] = !grid[row][column];
+        this.setState({
+            grid: grid
+        });
+    }
+
+    handleClear() {
+        const width = this.props.width;
+        const height = this.props.height;
+        this.setState({
+            grid: generateEmptyGrid(width, height)
+        });
+    }
+
     render() {
         return (
             <div>
-                <Grid width={10} height={10} />
+                <Grid 
+                    grid={this.state.grid}
+                    width={this.props.width}
+                    height={this.props.height}
+                    onClick={(row, column) => this.handleClick(row, column)}
+                />
+                <ClearButton onClick={() => this.handleClear()}/>
             </div>
         );
     }
 }
 
+function ClearButton(props) {
+    return(
+        <button onClick={props.onClick}>
+            Clear
+        </button>
+    );
+}
+
+function generateEmptyGrid(width, height) {
+    let grid = [];
+    for (let row = 0; row < height; row++) {
+        grid.push(Array(width).fill(false));
+    }
+    return grid;
+}
+
 ReactDOM.render(
-    <Builder />,
+    <Builder width={15} height={15} />,
     document.getElementById('root')
 );
