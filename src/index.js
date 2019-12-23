@@ -61,7 +61,8 @@ class Builder extends React.Component {
 
     handleClick(row, column) {
         const history = this.state.history.slice(0, this.state.stateNumber + 1);
-        const current = history[this.state.stateNumber];
+        // deep-copy of object
+        const current = JSON.parse(JSON.stringify(history[this.state.stateNumber]));
         const grid = current.grid.slice();
         grid[row][column] = !grid[row][column];
 
