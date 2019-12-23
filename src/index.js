@@ -80,6 +80,8 @@ class Builder extends React.Component {
                     height={this.props.height}
                     onClick={(row, column) => this.handleClick(row, column)}
                 />
+                <UndoButton />
+                <RedoButton />
                 <ClearButton onClick={() => this.handleClear()}/>
             </div>
         );
@@ -94,6 +96,22 @@ function ClearButton(props) {
     );
 }
 
+function UndoButton(props) {
+    return (
+        <button>
+            Undo
+        </button>
+    );
+}
+
+function RedoButton(props) {
+    return(
+        <button>
+            Redo
+        </button>
+    );
+}
+
 function generateEmptyGrid(width, height) {
     let grid = [];
     for (let row = 0; row < height; row++) {
@@ -102,7 +120,12 @@ function generateEmptyGrid(width, height) {
     return grid;
 }
 
+/*
+ * width:   46
+ * height:  46
+ */
+
 ReactDOM.render(
-    <Builder width={15} height={15} />,
+    <Builder width={20} height={20} />,
     document.getElementById('root')
 );
