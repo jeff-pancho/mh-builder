@@ -80,9 +80,11 @@ class Builder extends React.Component {
                     height={this.props.height}
                     onClick={(row, column) => this.handleClick(row, column)}
                 />
-                <UndoButton />
-                <RedoButton />
-                <ClearButton onClick={() => this.handleClear()}/>
+                <div className="buttons-container">
+                    <UndoButton />
+                    <RedoButton />
+                    <ClearButton onClick={() => this.handleClear()}/>
+                </div>
             </div>
         );
     }
