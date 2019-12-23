@@ -51,31 +51,57 @@ class Builder extends React.Component {
         const width = this.props.width;
         const height = this.props.height;
         this.state = {
-            grid: generateEmptyGrid(width, height)
+            history: [{
+                grid: generateEmptyGrid(width, height)
+            }],
+            stateNumber: 0
         }
     }
 
     handleClick(row, column) {
-        const grid = this.state.grid.slice();
+        const history = this.state.history.slice(0, this.state.stateNumber + 1);
+        const current = history[this.state.stateNumber];
+        const grid = current.grid.slice();
         grid[row][column] = !grid[row][column];
+
         this.setState({
-            grid: grid
+            history: history.concat([{
+                grid: grid
+            }]),
+            stateNumber: this.state.stateNumber + 1
         });
+
+
+        // const grid = this.state.grid.slice();
+        // grid[row][column] = !grid[row][column];
+        // this.setState({
+        //     grid: grid
+        // });
     }
 
     handleClear() {
         const width = this.props.width;
         const height = this.props.height;
+
+        const history = this.state.history.slice(0, this.state.stateNumber + 1);
+
         this.setState({
-            grid: generateEmptyGrid(width, height)
+            history: history.concat([{
+                grid: generateEmptyGrid(width, height)
+            }]),
+            stateNumber: this.state.stateNumber + 1
         });
     }
 
     render() {
+        const history = this.state.history.slice(0, this.state.stateNumber + 1);
+        console.log(history);
+        const current = history[this.state.stateNumber];
+
         return (
             <div>
                 <Grid 
-                    grid={this.state.grid}
+                    grid={current.grid}
                     width={this.props.width}
                     height={this.props.height}
                     onClick={(row, column) => this.handleClick(row, column)}
