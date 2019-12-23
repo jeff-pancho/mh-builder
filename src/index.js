@@ -56,6 +56,7 @@ class Builder extends React.Component {
             }],
             stateNumber: 0
         }
+        console.log(this.state);
     }
 
     handleClick(row, column) {
@@ -70,13 +71,6 @@ class Builder extends React.Component {
             }]),
             stateNumber: this.state.stateNumber + 1
         });
-
-
-        // const grid = this.state.grid.slice();
-        // grid[row][column] = !grid[row][column];
-        // this.setState({
-        //     grid: grid
-        // });
     }
 
     handleClear() {
@@ -93,9 +87,24 @@ class Builder extends React.Component {
         });
     }
 
+    handleUndo() {
+        if (this.state.stateNumber > 0) {
+            this.setState({
+                stateNumber: this.state.stateNumber - 1
+            });
+        }
+    }
+
+    handleRedo() {
+        if (this.state.stateNumber < this.state.history.length - 1) {
+            this.setState({
+                stateNumber: this.state.stateNumber + 1
+            });
+        }
+    }
+
     render() {
-        const history = this.state.history.slice(0, this.state.stateNumber + 1);
-        console.log(history);
+        const history = this.state.history;
         const current = history[this.state.stateNumber];
 
         return (
@@ -107,8 +116,8 @@ class Builder extends React.Component {
                     onClick={(row, column) => this.handleClick(row, column)}
                 />
                 <div className="buttons-container">
-                    <UndoButton />
-                    <RedoButton />
+                    <UndoButton onClick={() => this.handleUndo()}/>
+                    <RedoButton onClick={() => this.handleRedo()}/>
                     <ClearButton onClick={() => this.handleClear()}/>
                 </div>
             </div>
@@ -126,7 +135,7 @@ function ClearButton(props) {
 
 function UndoButton(props) {
     return (
-        <button>
+        <button onClick={props.onClick}>
             Undo
         </button>
     );
@@ -134,7 +143,7 @@ function UndoButton(props) {
 
 function RedoButton(props) {
     return(
-        <button>
+        <button onClick={props.onClick}>
             Redo
         </button>
     );
