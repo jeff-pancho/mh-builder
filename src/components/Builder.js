@@ -1,6 +1,7 @@
 import React from "react";
 import Grid from "./Grid.js";
 import {ClearButton, UndoButton, RedoButton} from "./Buttons.js";
+import {generateEmptyGrid} from "../utils/utils.js";
 
 class Builder extends React.Component {
     constructor(props) {
@@ -82,14 +83,6 @@ class Builder extends React.Component {
             </div>
         );
     }
-}
-
-function generateEmptyGrid(width, height) {
-    let grid = [];
-    for (let row = 0; row < height; row++) {
-        grid.push(Array(width).fill(false));
-    }
-    return grid;
 }
 
 export default Builder;

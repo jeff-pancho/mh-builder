@@ -32,12 +32,4 @@ class Grid extends React.Component {
     }
 }
 
-function generateEmptyGrid(width, height) {
-    let grid = [];
-    for (let row = 0; row < height; row++) {
-        grid.push(Array(width).fill(false));
-    }
-    return grid;
-}
-
 export default Grid;
