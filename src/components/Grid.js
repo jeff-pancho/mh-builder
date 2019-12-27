@@ -5,7 +5,7 @@ class Grid extends React.Component {
     renderSquare(row, column) {
         return (
             <Square 
-                key={column}
+                key={`${row},${column}`}
                 value={this.props.grid[row][column]} 
                 onClick={() => this.props.onClick(row, column)} 
             />

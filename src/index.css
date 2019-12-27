@@ -11,9 +11,9 @@
     display: inline-block;
 }
 
-.square:hover {
+/* .square:hover {
     background-color: #FF0000 !important;
-}
+} */
 
 .grid-row {
     height: 25px;
