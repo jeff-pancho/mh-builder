@@ -12,7 +12,7 @@ class Picker extends React.Component {
                 <div
                     key={colour}
                     className="square" 
-                    onClick={this.props.onClick()}
+                    onClick={() => this.props.onClick(colour)}
                     style={style}>
                 </div>
             );

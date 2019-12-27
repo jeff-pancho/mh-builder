@@ -88,9 +88,9 @@ class Builder extends React.Component {
                     <RedoButton onClick={() => this.handleRedo()}/>
                     <ClearButton onClick={() => this.handleClear()}/>
                 </div>
-                {/* <Picker
+                <Picker
                     onClick={(colour) => this.handleColourPick(colour)} 
-                /> */}
+                />
             </div>
         );
     }
