@@ -2,9 +2,9 @@ import React from "react";
 
 class Square extends React.Component {
     render () {
-        let style = this.props.value ?
-            {backgroundColor: "#FF0000"} :
-            {backgroundColor: "#FFFFFF"};
+        let style = {
+            backgroundColor: this.props.value
+        };
         return (
             <div className="square" style={style} onClick={this.props.onClick}></div>
         );

@@ -14,7 +14,8 @@ class Builder extends React.Component {
             history: [{
                 grid: generateEmptyGrid(width, height)
             }],
-            stateNumber: 0
+            stateNumber: 0,
+            currentColour: "#FF0000"
         }
         console.log(this.state);
     }
@@ -24,7 +25,7 @@ class Builder extends React.Component {
         // deep-copy of object
         const current = JSON.parse(JSON.stringify(history[this.state.stateNumber]));
         const grid = current.grid.slice();
-        grid[row][column] = !grid[row][column];
+        grid[row][column] = this.state.currentColour;
 
         this.setState({
             history: history.concat([{
@@ -64,6 +65,12 @@ class Builder extends React.Component {
         }
     }
 
+    handleColourPick(colour) {
+        this.setState({
+            currentColour: colour
+        });
+    }
+
     render() {
         const history = this.state.history;
         const current = history[this.state.stateNumber];
@@ -81,7 +88,9 @@ class Builder extends React.Component {
                     <RedoButton onClick={() => this.handleRedo()}/>
                     <ClearButton onClick={() => this.handleClear()}/>
                 </div>
-                <Picker />
+                {/* <Picker
+                    onClick={(colour) => this.handleColourPick(colour)} 
+                /> */}
             </div>
         );
     }

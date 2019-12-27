@@ -2,7 +2,7 @@ import React from "react";
 import Square from "./Square.js"
 
 class Grid extends React.Component {
-    renderSquare(row, column) {
+    renderSquare(row, column, colour) {
         return (
             <Square 
                 key={`${row},${column}`}
