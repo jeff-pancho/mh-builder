@@ -1,8 +1,8 @@
 import React from "react";
 import Grid from "./Grid.js";
 import Picker from "./Picker.js";
-import {ClearButton, UndoButton, RedoButton} from "./Buttons.js";
-import {generateEmptyGrid} from "../utils/utils.js";
+import { ClearButton, UndoButton, RedoButton } from "./Buttons.js";
+import { generateEmptyGrid } from "../utils/utils.js";
 
 class Builder extends React.Component {
     constructor(props) {

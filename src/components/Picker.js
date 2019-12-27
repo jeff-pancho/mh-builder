@@ -1,5 +1,5 @@
 import React from "react";
-import {COLOURS} from "../utils/constants.js"
+import { COLOURS } from "../utils/constants.js"
 
 class Picker extends React.Component {
     render() {
@@ -7,6 +7,7 @@ class Picker extends React.Component {
             let style = {
                 backgroundColor: colour
             }
+
             return (
                 <div
                     key={colour}
