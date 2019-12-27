@@ -25,14 +25,17 @@ class Builder extends React.Component {
         // deep-copy of object
         const current = JSON.parse(JSON.stringify(history[this.state.stateNumber]));
         const grid = current.grid.slice();
-        grid[row][column] = this.state.currentColour;
 
-        this.setState({
-            history: history.concat([{
-                grid: grid
-            }]),
-            stateNumber: this.state.stateNumber + 1
-        });
+        // check for no redundant placement
+        if (grid[row][column] !== this.state.currentColour) {
+            grid[row][column] = this.state.currentColour;
+            this.setState({
+                history: history.concat([{
+                    grid: grid
+                }]),
+                stateNumber: this.state.stateNumber + 1
+            });
+        }
     }
 
     handleClear() {
