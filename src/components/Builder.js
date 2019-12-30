@@ -1,6 +1,7 @@
 import React from "react";
 import Grid from "./Grid.js";
 import Picker from "./Picker.js";
+import RadiusSlider from "./RadiusSlider.js";
 import { ClearButton, UndoButton, RedoButton } from "./Buttons.js";
 import { generateEmptyGrid } from "../utils/utils.js";
 
@@ -15,7 +16,8 @@ class Builder extends React.Component {
                 grid: generateEmptyGrid(width, height)
             }],
             stateNumber: 0,
-            currentColour: "#FF0000"
+            currentColour: "#FF0000",
+            currentRadius: 1
         }
         console.log(this.state);
     }
@@ -72,6 +74,10 @@ class Builder extends React.Component {
         this.setState({
             currentColour: colour
         });
+    } 
+
+    handleChange(e) {
+        console.log(e.target.value);
     }
 
     render() {
@@ -94,6 +100,7 @@ class Builder extends React.Component {
                 <Picker
                     onClick={(colour) => this.handleColourPick(colour)} 
                 />
+                <RadiusSlider onChange={(e) => this.handleChange(e)}/>
             </div>
         );
     }
