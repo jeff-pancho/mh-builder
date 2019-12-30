@@ -8,6 +8,7 @@
     border: 1px solid #000000;
 
     margin: 0;
+    padding: 0;
     display: inline-block;
 }
 
@@ -15,9 +16,9 @@
     background-color: #FF0000 !important;
 } */
 
-.grid-row {
+/* .grid-row {
     height: 25px;
-}
+} */
 
 .buttons-container {
     margin-top: 10px;

@@ -77,7 +77,9 @@ class Builder extends React.Component {
     } 
 
     handleChange(e) {
-        console.log(e.target.value);
+        this.setState({
+            currentRadius: e.target.value
+        });
     }
 
     render() {
@@ -101,6 +103,7 @@ class Builder extends React.Component {
                     onClick={(colour) => this.handleColourPick(colour)} 
                 />
                 <RadiusSlider onChange={(e) => this.handleChange(e)}/>
+                <p>{this.state.currentRadius}</p>
             </div>
         );
     }

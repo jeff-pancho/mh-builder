@@ -1,24 +1,24 @@
 import React from "react";
 
-function ClearButton(props) {
+const ClearButton = ({onClick}) => {
     return(
-        <button onClick={props.onClick}>
+        <button onClick={onClick}>
             Clear
         </button>
     );
 }
 
-function UndoButton(props) {
+const UndoButton = ({onClick}) => {
     return (
-        <button onClick={props.onClick}>
+        <button onClick={onClick}>
             Undo
         </button>
     );
 }
 
-function RedoButton(props) {
+const RedoButton = ({onClick}) => {
     return(
-        <button onClick={props.onClick}>
+        <button onClick={onClick}>
             Redo
         </button>
     );
