@@ -8,6 +8,6 @@ import Builder from "./components/Builder.js"
  * height:  46
  */
 ReactDOM.render(
-    <Builder width={40} height={30} />,
+    <Builder />,
     document.getElementById('root')
 );
