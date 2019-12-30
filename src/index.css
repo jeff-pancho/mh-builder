@@ -1,15 +1,11 @@
 .square {
-    width: 25px;
-    height: 25px;
-    max-width: 40px;
-    max-height: 40px;
-
+    width: 15px;
+    height: 15px;
     background-color: #FFFFFF;
     border: 1px solid #000000;
 
     margin: 0;
     padding: 0;
-    display: inline-block;
 }
 
 /* .square:hover {
@@ -17,7 +13,7 @@
 } */
 
 /* .grid-row {
-    height: 25px;
+    height: 15px;
 } */
 
 .buttons-container {

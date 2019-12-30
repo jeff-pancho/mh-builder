@@ -1,8 +1,8 @@
 import React from "react";
 
 // 46x46 original size
-const WIDTH = 20;
-const HEIGHT = 20;
+const WIDTH = 46;
+const HEIGHT = 46;
 
 class Grid extends React.Component {
     renderSquare(row, column) {
@@ -23,11 +23,11 @@ class Grid extends React.Component {
             for (let column = 0; column < width; column++) {
                 columns.push(this.renderSquare(row, column));
             }
-            squareGrid.push(<tr>{columns}</tr>);
+            squareGrid.push(<tr key={row}>{columns}</tr>);
         }
 
         return (
-            <table cellSpacing="0" cellPading="0">
+            <table className="grid-row" cellSpacing="0" cellPadding="0">
                 <thead>{squareGrid}</thead>
             </table>
         );
@@ -54,8 +54,9 @@ class Builder extends React.Component {
 
 const generateEmptyGrid = (width, height) => {
     let grid = Array(height).fill().map(() => {
-        Array(width).fill("#FFFFFF");
+        return Array(width).fill("#FFFFFF");
     });
+    return grid;
 }
 
 export default Builder;
