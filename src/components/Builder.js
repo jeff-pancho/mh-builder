@@ -5,14 +5,22 @@ const WIDTH = 46;
 const HEIGHT = 46;
 
 class Grid extends React.Component {
-    renderSquare(row, column) {
+    renderSquare = (row, column) => {
         return (
             <td
                 key={`${row},${column}`}
                 className="square"
+                style={{backgroundColor: this.props.grid[row][column]}}
+                onMouseDown={() => this.handleOnMouseDown(row, column)}
             >
             </td>
         );
+    }
+
+    handleOnMouseDown = (row, column) => {
+        const grid = this.props.grid;
+        grid[row][column] = "#404040";
+        this.props.onChange(grid);
     }
 
     render() {
@@ -43,10 +51,21 @@ class Builder extends React.Component {
         };
     }
 
+    handleOnChange = (grid) => {
+        this.setState({
+            grid: grid
+        });
+    }
+
     render() {
         return (
             <div id="builder">
-                <Grid width={WIDTH} height={HEIGHT}/>
+                <Grid 
+                    width={WIDTH} 
+                    height={HEIGHT} 
+                    grid={this.state.grid}
+                    onChange={this.handleOnChange}
+                />
             </div>
         );
     }
