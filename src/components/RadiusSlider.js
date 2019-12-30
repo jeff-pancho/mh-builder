@@ -17,7 +17,7 @@ class RadiusSlider extends React.Component {
 }
 */
 
-const RadiusSlider = ({onChange}) => {
+const RadiusSlider = ({ onChange }) => {
     return (
         <input
             type="range"

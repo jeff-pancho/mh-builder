@@ -1,6 +1,6 @@
 import React from "react";
 
-const ClearButton = ({onClick}) => {
+const ClearButton = ({ onClick }) => {
     return(
         <button onClick={onClick}>
             Clear
@@ -8,7 +8,7 @@ const ClearButton = ({onClick}) => {
     );
 }
 
-const UndoButton = ({onClick}) => {
+const UndoButton = ({ onClick }) => {
     return (
         <button onClick={onClick}>
             Undo
@@ -16,7 +16,7 @@ const UndoButton = ({onClick}) => {
     );
 }
 
-const RedoButton = ({onClick}) => {
+const RedoButton = ({ onClick }) => {
     return(
         <button onClick={onClick}>
             Redo

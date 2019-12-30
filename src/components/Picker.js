@@ -28,7 +28,7 @@ class Picker extends React.Component {
 }
 */
 
-const Picker = ({onClick}) => {
+const Picker = ({ onClick }) => {
     const picks = COLOURS.map((colour) => {
         let style = {
             backgroundColor: colour

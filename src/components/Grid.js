@@ -1,7 +1,7 @@
 import React from "react";
 // import Square from "./Square.js"
 
-const Grid = ({width, height, grid, onClick}) => {
+const Grid = ({ width, height, grid, onClick }) => {
     const renderSquare = (row, column) => {
         return (
             <td  
