@@ -6,6 +6,17 @@ const HEIGHT = 46;
 const SQUARE_SIZE = 15;
 
 class Grid extends React.Component {
+    renderBuilding(row, column, colour) {
+        return (
+            <Building
+                key={`${row},${column}`}
+                row={row}
+                column={column}
+                colour={colour} 
+            />
+        );
+    }
+
     render() {
         let style = {
             width: SQUARE_SIZE * WIDTH,
@@ -16,12 +27,22 @@ class Grid extends React.Component {
             gridTemplateRows: "repeat(" + HEIGHT + ", " + SQUARE_SIZE + "px)"
         };
 
+        const grid = this.props.grid;
+        let buildings = [];
+        for (let row = 0; row < HEIGHT; row++) {
+            for (let column = 0; column < WIDTH; column++) {
+                if (grid[row][column] !== null) {
+                    buildings.push(this.renderBuilding(row, column, grid[row][column]));
+                }
+            }
+        }
+
         return (
             <div
                 className="grid" 
                 style={style}
                 onClick={(e) => this.props.onClick(e)}
-            ></div>
+            >{buildings}</div>
         );
     }
 }
@@ -50,8 +71,15 @@ class Builder extends React.Component {
         let {x, y} = relativeCoords(e);
         let row = Math.floor(y / SQUARE_SIZE);
         let column = Math.floor(x / SQUARE_SIZE);
+
+        const grid = this.state.grid.slice();
+        grid[row][column] = "#FF0000";
         
-        console.log(`${row}, ${column}`);
+        this.setState({
+            grid: grid
+        });
+        
+        // console.log(`${row}, ${column}`);
     }
 
     render() {
@@ -64,6 +92,23 @@ class Builder extends React.Component {
             </div>
         );
     }
+}
+
+const Building = (props) => {
+    let style = {
+        backgroundColor: props.colour,
+        gridColumn: props.column + 1,
+        gridRow: props.row + 1
+    }
+
+    return (
+        <div
+            className="building"
+            style={style}
+        >
+
+        </div>
+    );
 }
 
 const relativeCoords = (e) => {
