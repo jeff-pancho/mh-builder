@@ -10,14 +10,18 @@ class Grid extends React.Component {
         let style = {
             width: SQUARE_SIZE * WIDTH,
             height: SQUARE_SIZE * HEIGHT,
-            border: "1px black",
-            borderStyle: "solid none none solid",
             background: cssGrid(SQUARE_SIZE),
-            backgroundSize: "15px 15px"
+            backgroundSize: SQUARE_SIZE + "px " + SQUARE_SIZE + "px",
+            gridTemplateColumns: "repeat(" + WIDTH + ", " + SQUARE_SIZE + "px)",
+            gridTemplateRows: "repeat(" + HEIGHT + ", " + SQUARE_SIZE + "px)"
         };
 
         return (
-            <div className="grid" style={style}></div>
+            <div
+                className="grid" 
+                style={style}
+                onClick={(e) => this.props.onClick(e)}
+            ></div>
         );
     }
 }
@@ -31,7 +35,6 @@ const cssGrid = (size) => {
     background += "transparent " + (size - 1) + "px, ";
     background += "black " + (size - 1) + "px, ";
     background += "black " + size + "px)";
-    console.log(background);
     return background;
 }
 
@@ -42,14 +45,32 @@ class Builder extends React.Component {
             grid: generateEmptyGrid(WIDTH, HEIGHT)
         };
     }
+    
+    handleOnClick(e) {
+        let {x, y} = relativeCoords(e);
+        let row = Math.floor(y / SQUARE_SIZE);
+        let column = Math.floor(x / SQUARE_SIZE);
+        
+        console.log(`${row}, ${column}`);
+    }
 
     render() {
         return (
             <div>
-                <Grid grid={this.state.grid}/>
+                <Grid 
+                    grid={this.state.grid}
+                    onClick={(e) => this.handleOnClick(e)}
+                />
             </div>
         );
     }
+}
+
+const relativeCoords = (e) => {
+    let rect = e.currentTarget.getBoundingClientRect();
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+    return {x, y};
 }
 
 const generateEmptyGrid = (width, height) => {

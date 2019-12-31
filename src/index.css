@@ -8,6 +8,12 @@
     padding: 0;
 }
 
+.grid {
+    border: 1px black;
+    border-style: solid none none solid;
+    display: grid;
+}
+
 /* .square:hover {
     background-color: #FF0000 !important;
 } */
