@@ -6,15 +6,9 @@ const HEIGHT = 46;
 const SQUARE_SIZE = 15;
 
 class Grid extends React.Component {
-    renderBuilding(row, column, colour) {
-        return (
-            <Building
-                key={`${row},${column}`}
-                row={row}
-                column={column}
-                colour={colour} 
-            />
-        );
+    renderBuilding(building) {
+        const {row, column} = building;
+        return <Building key={`${row},${column}`} {...building}/>
     }
 
     render() {
@@ -27,22 +21,16 @@ class Grid extends React.Component {
             gridTemplateRows: "repeat(" + HEIGHT + ", " + SQUARE_SIZE + "px)"
         };
 
-        const grid = this.props.grid;
-        let buildings = [];
-        for (let row = 0; row < HEIGHT; row++) {
-            for (let column = 0; column < WIDTH; column++) {
-                if (grid[row][column] !== null) {
-                    buildings.push(this.renderBuilding(row, column, grid[row][column]));
-                }
-            }
-        }
+        let buildingElements = this.props.buildings.map((building) => {
+            return this.renderBuilding(building);
+        });
 
         return (
             <div
                 className="grid" 
                 style={style}
                 onClick={(e) => this.props.onClick(e)}
-            >{buildings}</div>
+            >{buildingElements}</div>
         );
     }
 }
@@ -63,8 +51,18 @@ class Builder extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            grid: generateEmptyGrid(WIDTH, HEIGHT)
+            buildings: []
         };
+    }
+
+    createBuilding(row, column, width, height, colour) {
+        return {
+            row: row,
+            column: column,
+            width: width,
+            height: height,
+            colour: colour
+        }
     }
     
     handleOnClick(e) {
@@ -72,21 +70,18 @@ class Builder extends React.Component {
         let row = Math.floor(y / SQUARE_SIZE);
         let column = Math.floor(x / SQUARE_SIZE);
 
-        const grid = this.state.grid.slice();
-        grid[row][column] = "#FF0000";
-        
         this.setState({
-            grid: grid
+            buildings: this.state.buildings.concat([
+                this.createBuilding(row, column, 1, 1, "#FF0000")
+            ])
         });
-        
-        // console.log(`${row}, ${column}`);
     }
 
     render() {
         return (
             <div>
                 <Grid 
-                    grid={this.state.grid}
+                    buildings={this.state.buildings}
                     onClick={(e) => this.handleOnClick(e)}
                 />
             </div>
@@ -106,7 +101,6 @@ const Building = (props) => {
             className="building"
             style={style}
         >
-
         </div>
     );
 }
@@ -118,11 +112,13 @@ const relativeCoords = (e) => {
     return {x, y};
 }
 
+/*
 const generateEmptyGrid = (width, height) => {
     let grid = Array(height).fill().map(() => {
         return Array(width).fill(null);
     });
     return grid;
 }
+*/
 
 export default Builder;
