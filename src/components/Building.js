@@ -1,10 +1,10 @@
 import React from "react";
 
-const Building = (props) => {
+const Building = ({row, column, width, height, colour}) => {
     let style = {
-        backgroundColor: props.colour,
-        gridColumn: props.column + 1,
-        gridRow: props.row + 1
+        backgroundColor: colour,
+        gridColumn: column + 1 + " / span " + width,
+        gridRow: row + 1 + " / span " + height
     }
 
     return (
