@@ -1,5 +1,6 @@
 import React from "react";
 import Grid from "./Grid";
+import Picker from "./Picker";
 import { SQUARE_SIZE } from "../utils/constants";
 import { relativeCoords } from "../utils/utils";
 
@@ -7,7 +8,8 @@ class Builder extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            buildings: []
+            buildings: [],
+            currentBuilding: {}
         };
     }
 
@@ -33,6 +35,12 @@ class Builder extends React.Component {
         });
     }
 
+    handlePicker(building) {
+        this.setState({
+            currentBuilding: building
+        });
+    }
+
     render() {
         return (
             <div>
@@ -40,6 +48,7 @@ class Builder extends React.Component {
                     buildings={this.state.buildings}
                     onClick={(e) => this.handleOnClick(e)}
                 />
+                <Picker onClick={(building) => this.handlePicker(building)} />
             </div>
         );
     }
