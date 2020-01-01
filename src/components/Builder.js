@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "./Grid";
 import Picker from "./Picker";
-import { SQUARE_SIZE } from "../utils/constants";
+import { SQUARE_SIZE, BUILDINGS } from "../utils/constants";
 import { relativeCoords } from "../utils/utils";
 
 class Builder extends React.Component {
@@ -9,18 +9,16 @@ class Builder extends React.Component {
         super(props);
         this.state = {
             buildings: [],
-            currentBuilding: {}
+            currentBuilding: BUILDINGS[0]
         };
     }
 
-    createBuilding(row, column, width, height, colour) {
-        return {
+    createBuilding(row, column, building) {
+        let obj1 = {
             row: row,
-            column: column,
-            width: width,
-            height: height,
-            colour: colour
+            column: column
         }
+        return {...obj1, ...building};
     }
     
     handleOnClick(e) {
@@ -30,7 +28,7 @@ class Builder extends React.Component {
 
         this.setState({
             buildings: this.state.buildings.concat([
-                this.createBuilding(row, column, 1, 1, "#FF0000")
+                this.createBuilding(row, column, this.state.currentBuilding)
             ])
         });
     }

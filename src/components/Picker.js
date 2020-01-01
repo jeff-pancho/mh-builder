@@ -17,7 +17,7 @@ const Picker = ({ onClick }) => {
     });
 
     return (
-        <div className="picket-container">
+        <div className="picker-container">
             {picks}
         </div>
     );

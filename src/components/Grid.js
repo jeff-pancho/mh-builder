@@ -5,8 +5,8 @@ import { cssGrid } from "../utils/utils";
 
 class Grid extends React.Component {
     renderBuilding(building) {
-        const {row, column} = building;
-        return <Building key={`${row},${column}`} {...building}/>
+        const { row, column } = building;
+        return <Building key={`${row},${column}`} { ...building }/>
     }
 
     render() {
