@@ -14,11 +14,11 @@ class Builder extends React.Component {
     }
 
     createBuilding(row, column, building) {
-        let obj1 = {
+        return {
             row: row,
-            column: column
-        }
-        return {...obj1, ...building};
+            column: column,
+            ...building
+        };
     }
     
     handleOnClick(e) {

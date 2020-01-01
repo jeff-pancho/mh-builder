@@ -17,13 +17,11 @@ const relativeCoords = (e) => {
     return {x, y};
 }
 
-/*
 const generateEmptyGrid = (width, height) => {
     let grid = Array(height).fill().map(() => {
         return Array(width).fill(null);
     });
     return grid;
 }
-*/
 
 export {cssGrid, relativeCoords};
