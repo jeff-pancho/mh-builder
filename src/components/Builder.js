@@ -14,7 +14,8 @@ class Builder extends React.Component {
         this.state = {
             buildings: [],
             currentBuilding: BUILDINGS[0],
-            grid: generateEmptyGrid(WIDTH, HEIGHT)
+            grid: generateEmptyGrid(WIDTH, HEIGHT),
+            mousePos: { row: 0, column: 0 }
         };
     }
 
@@ -50,6 +51,21 @@ class Builder extends React.Component {
         }
     }
 
+    handleOnMouseMove(e) {
+        const { x, y } = relativeCoords(e);
+        const row = Math.floor(y / SQUARE_SIZE);
+        const column = Math.floor(x / SQUARE_SIZE);
+        const {row: prevRow, column: prevColumn} = this.state.mousePos;
+        
+        if (row !== prevRow || column !== prevColumn) {
+            // update to new row/column pos
+            this.setState({
+                mousePos: {row: row, column: column}
+            })
+            console.log({row: row, column: column});
+        }
+    }
+
     handlePicker(building) {
         this.setState({
             currentBuilding: building
@@ -62,6 +78,7 @@ class Builder extends React.Component {
                 <Grid 
                     buildings={this.state.buildings}
                     onClick={(e) => this.handleOnClick(e)}
+                    onMouseMove={(e) => this.handleOnMouseMove(e)}
                 />
                 <Picker onClick={(building) => this.handlePicker(building)} />
             </div>

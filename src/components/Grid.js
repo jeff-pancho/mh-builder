@@ -28,6 +28,7 @@ class Grid extends React.Component {
                 className="grid" 
                 style={style}
                 onClick={(e) => this.props.onClick(e)}
+                onMouseMove={(e) => this.props.onMouseMove(e)}
             >{buildingElements}</div>
         );
     }
