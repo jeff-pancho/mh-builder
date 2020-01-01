@@ -1,15 +1,20 @@
 import React from "react";
 import Grid from "./Grid";
 import Picker from "./Picker";
-import { SQUARE_SIZE, BUILDINGS } from "../utils/constants";
-import { relativeCoords } from "../utils/utils";
+import { WIDTH, HEIGHT, SQUARE_SIZE, BUILDINGS } from "../utils/constants";
+import { 
+    relativeCoords,
+    generateEmptyGrid,
+    checkForAvailableSpace
+} from "../utils/utils";
 
 class Builder extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             buildings: [],
-            currentBuilding: BUILDINGS[0]
+            currentBuilding: BUILDINGS[0],
+            grid: generateEmptyGrid(WIDTH, HEIGHT)
         };
     }
 
@@ -22,15 +27,27 @@ class Builder extends React.Component {
     }
     
     handleOnClick(e) {
-        let {x, y} = relativeCoords(e);
-        let row = Math.floor(y / SQUARE_SIZE);
-        let column = Math.floor(x / SQUARE_SIZE);
+        const { x, y } = relativeCoords(e);
+        const { width, height } = this.state.currentBuilding;
+        const row = Math.floor(y / SQUARE_SIZE);
+        const column = Math.floor(x / SQUARE_SIZE);
+        const endRow = row + height;
+        const endColumn = column + width;
+        const grid = this.state.grid.slice()
 
-        this.setState({
-            buildings: this.state.buildings.concat([
-                this.createBuilding(row, column, this.state.currentBuilding)
-            ])
-        });
+        if (checkForAvailableSpace(grid, row, column, width, height)) {
+            for (let r = row; r < endRow; r++) {
+                for (let c = column; c < endColumn; c++) {
+                    grid[r][c] = `${row},${column};`
+                }
+            }
+            this.setState({
+                buildings: this.state.buildings.concat([
+                    this.createBuilding(row, column, this.state.currentBuilding)
+                ]),
+                grid: grid
+            });
+        }
     }
 
     handlePicker(building) {
