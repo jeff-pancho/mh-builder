@@ -27,15 +27,13 @@ class Builder extends React.Component {
         };
     }
     
-    handleOnClick(e) {
-        const { x, y } = relativeCoords(e);
+    handleOnClick() {
         const { width, height } = this.state.currentBuilding;
-        const row = Math.floor(y / SQUARE_SIZE);
-        const column = Math.floor(x / SQUARE_SIZE);
+        const { row, column } = this.state.mousePos;
         const endRow = row + height;
         const endColumn = column + width;
         const grid = this.state.grid.slice()
-
+        
         if (checkForAvailableSpace(grid, row, column, width, height)) {
             for (let r = row; r < endRow; r++) {
                 for (let c = column; c < endColumn; c++) {
@@ -77,7 +75,7 @@ class Builder extends React.Component {
             <div>
                 <Grid 
                     buildings={this.state.buildings}
-                    onClick={(e) => this.handleOnClick(e)}
+                    onClick={() => this.handleOnClick()}
                     onMouseMove={(e) => this.handleOnMouseMove(e)}
                 />
                 <Picker onClick={(building) => this.handlePicker(building)} />
