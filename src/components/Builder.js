@@ -15,7 +15,8 @@ class Builder extends React.Component {
             buildings: [],
             currentBuilding: BUILDINGS[0],
             grid: generateEmptyGrid(WIDTH, HEIGHT),
-            mousePos: { row: 0, column: 0 }
+            mousePos: { row: 0, column: 0 },
+            buildingGhost: BUILDINGS[0]
         };
     }
 
@@ -44,7 +45,8 @@ class Builder extends React.Component {
                 buildings: this.state.buildings.concat([
                     this.createBuilding(row, column, this.state.currentBuilding)
                 ]),
-                grid: grid
+                grid: grid,
+                buildingGhost: this.renderBuildingGhost(row, column)
             });
         }
     }
@@ -58,9 +60,11 @@ class Builder extends React.Component {
         if (row !== prevRow || column !== prevColumn) {
             // update to new row/column pos
             this.setState({
-                mousePos: {row: row, column: column}
-            })
-            console.log({row: row, column: column});
+                mousePos: {row: row, column: column},
+                buildingGhost: this.renderBuildingGhost(row, column)
+            });
+            
+            // console.log({row: row, column: column});
         }
     }
 
@@ -70,11 +74,23 @@ class Builder extends React.Component {
         });
     }
 
+    renderBuildingGhost(row, column) {
+        const grid = this.state.grid.slice();
+        const { width, height } = this.state.currentBuilding;
+        const buildingGhost = this.createBuilding(row, column, this.state.currentBuilding);
+        if (!checkForAvailableSpace(grid, row, column, width, height)) {
+            buildingGhost.colour = "#8a0000";
+        }
+        
+        return buildingGhost;
+    }
+
     render() {
         return (
             <div>
                 <Grid 
                     buildings={this.state.buildings}
+                    buildingGhost={this.state.buildingGhost}
                     onClick={() => this.handleOnClick()}
                     onMouseMove={(e) => this.handleOnMouseMove(e)}
                 />
