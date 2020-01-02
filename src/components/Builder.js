@@ -55,7 +55,7 @@ class Builder extends React.Component {
             buildings = buildings.concat([
                 this.createBuilding(row, column, this.state.currentBuilding)
             ]);
-            
+
             this.setState({
                 history: history.concat([{
                     buildings: buildings,
@@ -136,12 +136,21 @@ class Builder extends React.Component {
     }
 
     handleUndo() {
-
+        if (this.state.stateNumber > 0) {
+            this.setState({
+                stateNumber: this.state.stateNumber - 1
+            });
+        }
     }
 
     handleRedo() {
-
+        if (this.state.stateNumber < this.state.history.length - 1) {
+            this.setState({
+                stateNumber: this.state.stateNumber + 1
+            });
+        }
     }
+
 
     handleClear() {
 
@@ -162,9 +171,9 @@ class Builder extends React.Component {
                 />
                 <Picker onClick={(building) => this.handlePicker(building)} />
                 <Buttons
-                    handleUndo={this.handleUndo}
-                    handleRedo={this.handleRedo}
-                    handleClear={this.handleClear}
+                    handleUndo={() => this.handleUndo()}
+                    handleRedo={() => this.handleRedo()}
+                    handleClear={() => this.handleClear()}
                 />
             </div>
         );
