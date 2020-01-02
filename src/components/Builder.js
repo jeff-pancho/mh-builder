@@ -71,12 +71,12 @@ class Builder extends React.Component {
     handleRemoveBuilding(e) {
         e.preventDefault();
         const grid = this.state.grid.slice();
-        const { row, column } = this.state.mousePos;
-        const id = grid[row][column];
+        const {row: mouseRow, column: mouseColumn} = this.state.mousePos;
+        const id = grid[mouseRow][mouseColumn];
 
         if (id !== null) {
             const buildings = this.state.buildings.slice();
-            const { height, width } = buildings[id];
+            const { row, column, width, height } = buildings[id];
             const endRow = row + height;
             const endColumn = column + width;
 
@@ -89,7 +89,8 @@ class Builder extends React.Component {
 
             this.setState({
                 buildings: buildings,
-                grid: grid
+                grid: grid,
+                buildingGhost: this.renderBuildingGhost(row, column)
             });
         }
     }
