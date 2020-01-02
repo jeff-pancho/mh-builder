@@ -1,6 +1,7 @@
 import React from "react";
 import Grid from "./Grid";
 import Picker from "./Picker";
+import Buttons from "./Buttons";
 import { WIDTH, HEIGHT, SQUARE_SIZE, BUILDINGS } from "../utils/constants";
 import { 
     relativeCoords,
@@ -112,6 +113,18 @@ class Builder extends React.Component {
         return buildingGhost;
     }
 
+    handleUndo() {
+
+    }
+
+    handleRedo() {
+
+    }
+
+    handleClear() {
+
+    }
+
     render() {
         return (
             <div>
@@ -123,6 +136,11 @@ class Builder extends React.Component {
                     onContextMenu={(e) => this.handleRemoveBuilding(e)} 
                 />
                 <Picker onClick={(building) => this.handlePicker(building)} />
+                <Buttons
+                    handleUndo={this.handleUndo}
+                    handleRedo={this.handleRedo}
+                    handleClear={this.handleClear}
+                />
             </div>
         );
     }
