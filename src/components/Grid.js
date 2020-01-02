@@ -5,9 +5,17 @@ import { cssGrid } from "../utils/utils";
 
 class Grid extends React.Component {
     renderBuilding(building, isGhost, id) {
-        const key = isGhost ? "ghost" : id;
+        const { row, column } = building;
+        const key = isGhost ? "ghost" : `${row},${column}`;
         
-        return <Building key={key} buildingId={key} { ...building }/>
+        return (
+            <Building 
+                key={key} 
+                buildingId={id}
+                onClick={() => this.props.removeBuilding(id)}
+                { ...building }
+            />
+        );
     }
 
     render() {
@@ -31,10 +39,12 @@ class Grid extends React.Component {
             <div
                 className="grid" 
                 style={style}
-                onClick={() => this.props.onClick()}
+                onClick={(e) => this.props.onClick(e)}
                 onMouseMove={(e) => this.props.onMouseMove(e)}
-                onContextMenu={(e) => e.preventDefault()}
-            >{buildingElements}</div>
+                onContextMenu={(e) => this.props.onContextMenu(e)}
+            >
+                {buildingElements}
+            </div>
         );
     }
 }

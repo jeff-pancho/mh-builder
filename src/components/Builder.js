@@ -68,6 +68,33 @@ class Builder extends React.Component {
         }
     }
 
+    handleRemoveBuilding(e) {
+        e.preventDefault();
+        const grid = this.state.grid.slice();
+        const { row, column } = this.state.mousePos;
+        const id = grid[row][column];
+        console.log(id);
+
+        if (id !== null) {
+            const buildings = this.state.buildings.slice();
+            const { height, width } = buildings[id];
+            const endRow = row + height;
+            const endColumn = column + width;
+            
+            for (let r = row; r < endRow; r++) {
+                for (let c = column; c < endColumn; c++) {
+                    grid[r][c] = null;
+                }
+            }
+            buildings.splice(id, 1);
+
+            this.setState({
+                buildings: buildings,
+                grid: grid
+            });
+        }
+    }
+
     handlePicker(building) {
         this.setState({
             currentBuilding: building
@@ -93,6 +120,7 @@ class Builder extends React.Component {
                     buildingGhost={this.state.buildingGhost}
                     onClick={() => this.handleOnClick()}
                     onMouseMove={(e) => this.handleOnMouseMove(e)}
+                    onContextMenu={(e) => this.handleRemoveBuilding(e)} 
                 />
                 <Picker onClick={(building) => this.handlePicker(building)} />
             </div>

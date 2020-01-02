@@ -16,4 +16,5 @@ const Building = ({row, column, width, height, colour}) => {
     );
 }
 
+
 export default Building;
