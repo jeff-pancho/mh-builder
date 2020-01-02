@@ -55,23 +55,15 @@ class Builder extends React.Component {
             buildings = buildings.concat([
                 this.createBuilding(row, column, this.state.currentBuilding)
             ]);
-            console.log(buildings);
+            
             this.setState({
                 history: history.concat([{
                     buildings: buildings,
                     grid: grid
                 }]),
-                stateNumber: this.state.stateNumber + 1
-            });
-            /*
-            this.setState({
-                buildings: this.state.buildings.concat([
-                    this.createBuilding(row, column, this.state.currentBuilding)
-                ]),
-                grid: grid,
+                stateNumber: this.state.stateNumber + 1,
                 buildingGhost: this.renderBuildingGhost(row, column)
             });
-            */
         }
     }
 
@@ -94,12 +86,14 @@ class Builder extends React.Component {
 
     handleRemoveBuilding(e) {
         e.preventDefault();
-        const grid = this.state.grid.slice();
+        const history = this.state.history;
+        const current = JSON.parse(JSON.stringify(history[this.state.stateNumber]));
+        const grid = current.grid.slice();
         const {row: mouseRow, column: mouseColumn} = this.state.mousePos;
         const id = grid[mouseRow][mouseColumn];
 
         if (id !== null) {
-            const buildings = this.state.buildings.slice();
+            const buildings = current.buildings.slice();
             const { row, column, width, height } = buildings[id];
             const endRow = row + height;
             const endColumn = column + width;
@@ -112,8 +106,11 @@ class Builder extends React.Component {
             buildings[id] = null;
 
             this.setState({
-                buildings: buildings,
-                grid: grid,
+                history: history.concat([{
+                    buildings: buildings,
+                    grid: grid
+                }]),
+                stateNumber: this.state.stateNumber + 1,
                 buildingGhost: this.renderBuildingGhost(mouseRow, mouseColumn)
             });
         }
