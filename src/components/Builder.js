@@ -38,7 +38,7 @@ class Builder extends React.Component {
         const endRow = row + height;
         const endColumn = column + width;
 
-        const history = this.state.history;
+        const history = this.state.history.slice(0, this.state.stateNumber + 1);
         // deep-copy of object
         const current = JSON.parse(JSON.stringify(history[this.state.stateNumber]));
         const grid = current.grid.slice()
@@ -86,7 +86,7 @@ class Builder extends React.Component {
 
     handleRemoveBuilding(e) {
         e.preventDefault();
-        const history = this.state.history;
+        const history = this.state.history.slice(0, this.state.stateNumber + 1);
         const current = JSON.parse(JSON.stringify(history[this.state.stateNumber]));
         const grid = current.grid.slice();
         const {row: mouseRow, column: mouseColumn} = this.state.mousePos;
@@ -123,7 +123,7 @@ class Builder extends React.Component {
     }
 
     renderBuildingGhost(row, column) {
-        const history = this.state.history;
+        const history = this.state.history.slice(0, this.state.stateNumber + 1);
         const current = history[this.state.stateNumber];
         const grid = current.grid.slice();
         const { width, height } = this.state.currentBuilding;
@@ -153,7 +153,15 @@ class Builder extends React.Component {
 
 
     handleClear() {
+        const history = this.state.history.slice(0, this.state.stateNumber + 1);
 
+        this.setState({
+            history: history.concat([{
+                buildings: [],
+                grid: generateEmptyGrid(WIDTH, HEIGHT),
+            }]),
+            stateNumber: this.state.stateNumber + 1
+        });
     }
 
     render() {
