@@ -13,11 +13,14 @@ class Builder extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            buildings: [],
+            history: [{
+                buildings: [],
+                grid: generateEmptyGrid(WIDTH, HEIGHT),
+            }],
             currentBuilding: BUILDINGS[0],
-            grid: generateEmptyGrid(WIDTH, HEIGHT),
             mousePos: { row: 0, column: 0 },
-            buildingGhost: BUILDINGS[0]
+            buildingGhost: BUILDINGS[0],
+            stateNumber: 0
         };
     }
 
@@ -34,14 +37,33 @@ class Builder extends React.Component {
         const { row, column } = this.state.mousePos;
         const endRow = row + height;
         const endColumn = column + width;
-        const grid = this.state.grid.slice()
+
+        const history = this.state.history;
+        // deep-copy of object
+        const current = JSON.parse(JSON.stringify(history[this.state.stateNumber]));
+        const grid = current.grid.slice()
         
         if (checkForAvailableSpace(grid, row, column, width, height)) {
+            let buildings = current.buildings.slice();
+
             for (let r = row; r < endRow; r++) {
                 for (let c = column; c < endColumn; c++) {
-                    grid[r][c] = this.state.buildings.length;
+                    grid[r][c] = buildings.length;
                 }
             }
+            
+            buildings = buildings.concat([
+                this.createBuilding(row, column, this.state.currentBuilding)
+            ]);
+            console.log(buildings);
+            this.setState({
+                history: history.concat([{
+                    buildings: buildings,
+                    grid: grid
+                }]),
+                stateNumber: this.state.stateNumber + 1
+            });
+            /*
             this.setState({
                 buildings: this.state.buildings.concat([
                     this.createBuilding(row, column, this.state.currentBuilding)
@@ -49,6 +71,7 @@ class Builder extends React.Component {
                 grid: grid,
                 buildingGhost: this.renderBuildingGhost(row, column)
             });
+            */
         }
     }
 
@@ -103,7 +126,9 @@ class Builder extends React.Component {
     }
 
     renderBuildingGhost(row, column) {
-        const grid = this.state.grid.slice();
+        const history = this.state.history;
+        const current = history[this.state.stateNumber];
+        const grid = current.grid.slice();
         const { width, height } = this.state.currentBuilding;
         const buildingGhost = this.createBuilding(row, column, this.state.currentBuilding);
         if (!checkForAvailableSpace(grid, row, column, width, height)) {
@@ -126,10 +151,13 @@ class Builder extends React.Component {
     }
 
     render() {
+        const history = this.state.history;
+        const current = history[this.state.stateNumber];
+
         return (
             <div>
                 <Grid 
-                    buildings={this.state.buildings}
+                    buildings={current.buildings}
                     buildingGhost={this.state.buildingGhost}
                     onClick={() => this.handleOnClick()}
                     onMouseMove={(e) => this.handleOnMouseMove(e)}
