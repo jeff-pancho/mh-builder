@@ -90,7 +90,7 @@ class Builder extends React.Component {
             this.setState({
                 buildings: buildings,
                 grid: grid,
-                buildingGhost: this.renderBuildingGhost(row, column)
+                buildingGhost: this.renderBuildingGhost(mouseRow, mouseColumn)
             });
         }
     }
