@@ -73,20 +73,19 @@ class Builder extends React.Component {
         const grid = this.state.grid.slice();
         const { row, column } = this.state.mousePos;
         const id = grid[row][column];
-        console.log(id);
 
         if (id !== null) {
             const buildings = this.state.buildings.slice();
             const { height, width } = buildings[id];
             const endRow = row + height;
             const endColumn = column + width;
-            
+
             for (let r = row; r < endRow; r++) {
                 for (let c = column; c < endColumn; c++) {
                     grid[r][c] = null;
                 }
             }
-            buildings.splice(id, 1);
+            buildings[id] = null;
 
             this.setState({
                 buildings: buildings,

@@ -28,7 +28,11 @@ class Grid extends React.Component {
             gridTemplateRows: "repeat(" + HEIGHT + ", " + SQUARE_SIZE + "px)"
         };
 
-        let buildingElements = this.props.buildings.map((building, id) => {
+        let buildingElements = this.props.buildings.filter(
+            (building) => {
+                return building !== null;
+            }
+        ).map((building, id) => {
             return this.renderBuilding(building, false, id);
         });
         buildingElements.push(
