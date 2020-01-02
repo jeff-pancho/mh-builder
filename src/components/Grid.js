@@ -4,11 +4,10 @@ import { WIDTH, HEIGHT, SQUARE_SIZE } from "../utils/constants";
 import { cssGrid } from "../utils/utils";
 
 class Grid extends React.Component {
-    renderBuilding(building, isGhost) {
-        const { row, column } = building;
-        const key = isGhost ? "ghost" : `${row},${column}`;
+    renderBuilding(building, isGhost, id) {
+        const key = isGhost ? "ghost" : id;
         
-        return <Building key={key} { ...building }/>
+        return <Building key={key} buildingId={key} { ...building }/>
     }
 
     render() {
@@ -21,8 +20,8 @@ class Grid extends React.Component {
             gridTemplateRows: "repeat(" + HEIGHT + ", " + SQUARE_SIZE + "px)"
         };
 
-        let buildingElements = this.props.buildings.map((building) => {
-            return this.renderBuilding(building);
+        let buildingElements = this.props.buildings.map((building, id) => {
+            return this.renderBuilding(building, false, id);
         });
         buildingElements.push(
             this.renderBuilding(this.props.buildingGhost, true)

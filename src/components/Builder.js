@@ -38,7 +38,7 @@ class Builder extends React.Component {
         if (checkForAvailableSpace(grid, row, column, width, height)) {
             for (let r = row; r < endRow; r++) {
                 for (let c = column; c < endColumn; c++) {
-                    grid[r][c] = `${row},${column};`
+                    grid[r][c] = this.state.buildings.length;
                 }
             }
             this.setState({
@@ -67,7 +67,7 @@ class Builder extends React.Component {
             // console.log({row: row, column: column});
         }
     }
-    
+
     handlePicker(building) {
         this.setState({
             currentBuilding: building
