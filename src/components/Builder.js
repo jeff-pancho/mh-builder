@@ -67,7 +67,7 @@ class Builder extends React.Component {
             // console.log({row: row, column: column});
         }
     }
-
+    
     handlePicker(building) {
         this.setState({
             currentBuilding: building
