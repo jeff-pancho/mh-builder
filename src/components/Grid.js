@@ -22,7 +22,7 @@ class Grid extends React.Component {
         let style = {
             width: SQUARE_SIZE * WIDTH,
             height: SQUARE_SIZE * HEIGHT,
-            background: cssGrid(SQUARE_SIZE),
+            backgroundImage: cssGrid(SQUARE_SIZE),
             backgroundSize: SQUARE_SIZE + "px " + SQUARE_SIZE + "px",
             gridTemplateColumns: "repeat(" + WIDTH + ", " + SQUARE_SIZE + "px)",
             gridTemplateRows: "repeat(" + HEIGHT + ", " + SQUARE_SIZE + "px)"

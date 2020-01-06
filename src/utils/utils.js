@@ -1,5 +1,7 @@
-const cssGrid = (size) => {
-    let background = "linear-gradient(to right, ";
+const cssGrid = (size, bgColour) => {
+    // let background = bgColour + " ";
+    let background = "";
+    background += "linear-gradient(to right, ";
     background += "transparent " + (size - 1) + "px, ";
     background += "black " + (size - 1) + "px, ";
     background += "black " + size + "px), ";

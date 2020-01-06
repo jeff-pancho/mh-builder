@@ -11,6 +11,7 @@
 .grid {
     border: 1px black;
     border-style: solid none none solid;
+    background-color: #BFBFBF;
     display: grid;
 }
 
