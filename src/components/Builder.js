@@ -168,7 +168,16 @@ class Builder extends React.Component {
     }
 
     handleRotate() {
-        console.log("Rotated!!!!");
+        let currentBuildingCopy = JSON.parse(
+            JSON.stringify(this.state.currentBuilding)
+        );
+        let temp = currentBuildingCopy.width;
+        currentBuildingCopy.width = currentBuildingCopy.height;
+        currentBuildingCopy.height = temp;
+        
+        this.setState({
+            currentBuilding: currentBuildingCopy
+        });
     }
 
     render() {
