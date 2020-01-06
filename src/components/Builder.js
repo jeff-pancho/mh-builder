@@ -2,6 +2,9 @@ import React from "react";
 import Grid from "./Grid";
 import Picker from "./Picker";
 import Buttons from "./Buttons";
+
+import BuilderPanel from "./BuilderPanel";
+
 import { WIDTH, HEIGHT, SQUARE_SIZE, BUILDINGS } from "../utils/constants";
 import { 
     relativeCoords,
@@ -169,7 +172,7 @@ class Builder extends React.Component {
         const current = history[this.state.stateNumber];
 
         return (
-            <div className="builder-container">
+            <BuilderPanel>
                 <Grid 
                     buildings={current.buildings}
                     buildingGhost={this.state.buildingGhost}
@@ -183,7 +186,7 @@ class Builder extends React.Component {
                     handleRedo={() => this.handleRedo()}
                     handleClear={() => this.handleClear()}
                 />
-            </div>
+            </BuilderPanel>
         );
     }
 }
