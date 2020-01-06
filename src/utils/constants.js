@@ -5,33 +5,33 @@ export const SQUARE_SIZE = 15;
 
 export const BUILDINGS = [
     {
-        width: 1,
-        height: 1,
-        colour: "#FF0000"
-    },
-    {
-        width: 1,
-        height: 2,
-        colour: "#FF7F00"
-    },
-    {
-        width: 2,
-        height: 1,
-        colour: "#FFFF00"
-    },
-    {
+        name: "conveyor",
         width: 2,
         height: 2,
-        colour: "#00FF00"
+        colour: "#262626"
     },
     {
+        name: "large conveyor ramp",
+        width: 5,
+        height: 2,
+        colour: "#3D3D3D"
+    },
+    {
+        name: "iron mine",
         width: 2,
-        height: 3,
-        colour: "#0000FF"
+        height: 2,
+        colour: "#777777"
     },
     {
+        name: "furnace",
+        width: 2,
+        height: 2,
+        colour: "#C76D6D"
+    },
+    {
+        name: "big bad blaster",
         width: 3,
-        height: 3,
-        colour: "#4B0082"
-    },
+        height: 2,
+        colour: "#DE7914"
+    }
 ];
