@@ -2,16 +2,15 @@ import React from "react";
 import { BUILDINGS } from "../utils/constants";
 
 const Picker = ({ onClick }) => {
-    let picks = BUILDINGS.map((building) => {
+    let picks = BUILDINGS.map((building, i) => {
         let { colour } = building;
         return (
             <div
-                key={colour}
+                key={i}
                 className="square"
                 style={{backgroundColor: colour}}
                 onClick={() => onClick(building)}
             >
-                
             </div>
         );
     });

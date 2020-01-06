@@ -29,9 +29,27 @@ export const BUILDINGS = [
         colour: "#C76D6D"
     },
     {
+        name: "azure refiner",
+        width: 4,
+        height: 6,
+        colour: "#2FB3F5"
+    },
+    {
+        name: "portable ore advancer",
+        width: 3,
+        height: 2,
+        colour: "#8C17EB"
+    },
+    {
         name: "big bad blaster",
         width: 3,
         height: 2,
         colour: "#DE7914"
+    },
+    {
+        name: "tesla resetter",
+        width: 8,
+        height: 6,
+        colour: "#D3D61C"
     }
 ];
