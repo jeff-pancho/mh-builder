@@ -169,7 +169,7 @@ class Builder extends React.Component {
         const current = history[this.state.stateNumber];
 
         return (
-            <div>
+            <div className="builder-container">
                 <Grid 
                     buildings={current.buildings}
                     buildingGhost={this.state.buildingGhost}

@@ -1,3 +1,8 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
 .square {
     width: 15px;
     height: 15px;
@@ -15,19 +20,20 @@
     display: grid;
 }
 
+.builder-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+    margin: 40px auto;
+    width: 80%;
+}
+
 .building {
     border: 1px black;
     border-style: none solid solid none;
     pointer-events: none;
 }
-
-/* .square:hover {
-    background-color: #FF0000 !important;
-} */
-
-/* .grid-row {
-    height: 15px;
-} */
 
 .buttons-container {
     margin-top: 10px;
