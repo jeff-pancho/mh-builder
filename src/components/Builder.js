@@ -167,6 +167,10 @@ class Builder extends React.Component {
         });
     }
 
+    handleRotate() {
+        console.log("Rotated!!!!");
+    }
+
     render() {
         const history = this.state.history;
         const current = history[this.state.stateNumber];
@@ -182,6 +186,7 @@ class Builder extends React.Component {
                 />
                 <Picker onClick={(building) => this.handlePicker(building)} />
                 <Buttons
+                    handleRotate={() => this.handleRotate()}
                     handleUndo={() => this.handleUndo()}
                     handleRedo={() => this.handleRedo()}
                     handleClear={() => this.handleClear()}
